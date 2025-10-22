@@ -1,0 +1,25 @@
+{
+  "name": "sk-checkwing-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wingbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neros12/SK-checkwing-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neros12/SK-checkwing-bot/issues"
+  },
+  "homepage": "https://github.com/neros12/SK-checkwing-bot#readme",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.3",
+    "node-cron": "^4.2.1",
+    "puppeteer": "^24.26.0"
+  }
+}
