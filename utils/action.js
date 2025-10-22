@@ -48,7 +48,7 @@ async function join_zoom(room_id, room_pw, user_name, duration) {
     await iframe.waitForSelector('button[tabindex="0"]');
     await iframe.click('button[tabindex="0"]');
     send_slack_message(
-      `*${user_name}* 님은 현재 Zoom 회의 \`${room_id}\` 대기중입니다`
+      `*${user_name}* 님은 현재 Zoom 회의 \`${room_id}\` 접속 완료`
     );
 
     await new Promise((resolve) =>
@@ -57,7 +57,7 @@ async function join_zoom(room_id, room_pw, user_name, duration) {
 
     await browser.close();
     send_slack_message(
-      `*${user_name}* 님의 Zoom 회의 \`${room_id}\` 접속 완료`
+      `*${user_name}* 님의 Zoom 회의 \`${room_id}\` 퇴실 완료`
     );
   } catch (err) {
     send_slack_message(

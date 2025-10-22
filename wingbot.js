@@ -15,6 +15,10 @@ function schedule_meeting(meeting) {
   minute = Math.floor((totalSeconds % 3600) / 60);
   second = totalSeconds % 60;
 
+  console.log(
+    `[예약등록완료] 사용자: ${meeting.user_name}  회의 ID: ${meeting.room_id}  예약시간: ${meeting.start_time}`
+  );
+
   const cron_exp = `${second} ${minute} ${hour} * * *`;
   cron.schedule(cron_exp, () => {
     join_zoom(
