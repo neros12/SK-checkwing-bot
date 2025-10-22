@@ -11,6 +11,7 @@ const { send_slack_message } = require("./slack");
  */
 async function join_zoom(room_id, room_pw, user_name, duration) {
   try {
+    const clean_room_id = room_id.replaceAll(" ", "");
     send_slack_message(
       `*${user_name}* 님이 Zoom 회의 \`${room_id}\` 접속을 시작합니다`
     );
@@ -23,7 +24,7 @@ async function join_zoom(room_id, room_pw, user_name, duration) {
     });
 
     await page.waitForSelector('input.join-meetingId[type="text"]');
-    await page.type('input.join-meetingId[type="text"]', room_id);
+    await page.type('input.join-meetingId[type="text"]', clean_room_id);
     await page.click(".btn-join.btn.btn-primary");
 
     await page.waitForSelector("iframe");
