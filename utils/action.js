@@ -52,7 +52,7 @@ async function join_zoom(room_id, room_pw, user_name, duration) {
     );
 
     await new Promise((resolve) =>
-      setTimeout(resolve, Number(duration) * 1000)
+      setTimeout(resolve, Number(duration) * 1000 + 3600 * 1000)
     );
 
     await browser.close();
