@@ -19,7 +19,7 @@ function schedule_meeting(meeting) {
     `[예약등록완료] 사용자: ${meeting.user_name}  회의 ID: ${meeting.room_id}  예약시간: ${hour}:${minute}`
   );
 
-  const cron_exp = `${second} ${minute} ${hour} * * *`;
+  const cron_exp = `${second} ${minute} ${hour} * * ${meeting.day}`;
   cron.schedule(cron_exp, () => {
     join_zoom(
       meeting.room_name,
