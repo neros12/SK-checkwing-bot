@@ -4,16 +4,17 @@ const { send_slack_message } = require("./slack");
 
 /**
  * Zoom 자동 입장 / 대기 하는 함수
+ * @param {string} room_name - 방 이름 
  * @param {string} room_id - 방 ID
  * @param {string} room_pw - 방 비밀번호 (활성화 코드)
  * @param {string} user_name - 사용자 이름
  * @param {string} duration - 머무르는 시간 (ms)
  */
-async function join_zoom(room_id, room_pw, user_name, duration) {
+async function join_zoom(room_name, room_id, room_pw, user_name, duration) {
   try {
     const clean_room_id = room_id.replaceAll(" ", "");
     send_slack_message(
-      `*${user_name}* 님이 Zoom 회의 \`${room_id}\` 접속을 시작합니다`
+      `*${user_name}* 님이 Zoom 회의 \`${room_id}\` *${room_name}* 접속을 시작합니다`
     );
     const browser = await puppeteer.launch({
       headless: true,
@@ -48,7 +49,7 @@ async function join_zoom(room_id, room_pw, user_name, duration) {
     await iframe.waitForSelector('button[tabindex="0"]');
     await iframe.click('button[tabindex="0"]');
     send_slack_message(
-      `*${user_name}* 님은 현재 Zoom 회의 \`${room_id}\` 접속 완료`
+      `*${user_name}* 님은 현재 Zoom 회의 \`${room_id}\` *${room_name}*  접속 완료`
     );
 
     await new Promise((resolve) =>
@@ -57,11 +58,11 @@ async function join_zoom(room_id, room_pw, user_name, duration) {
 
     await browser.close();
     send_slack_message(
-      `*${user_name}* 님의 Zoom 회의 \`${room_id}\` 퇴실 완료`
+      `*${user_name}* 님의 Zoom 회의 \`${room_id}\` *${room_name}*  퇴실 완료`
     );
   } catch (err) {
     send_slack_message(
-      `*${user_name}* 님의 Zoom 회의 \`${room_id}\` 접속중 오류 발생\n${err}`
+      `*${user_name}* 님의 Zoom 회의 \`${room_id}\` *${room_name}*  접속중 오류 발생\n${err}`
     );
   }
 }
