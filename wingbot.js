@@ -2,7 +2,7 @@ const fs = require("fs");
 const cron = require("node-cron");
 
 const { join_zoom } = require("./utils/action");
-
+const { send_slack_message } = require("./utils/slack");
 
 const schedules = JSON.parse(
   fs.readFileSync("./schedule.config.json", "utf-8")
@@ -15,7 +15,7 @@ function schedule_meeting(meeting) {
   minute = Math.floor((totalSeconds % 3600) / 60);
   second = totalSeconds % 60;
 
-  console.log(
+  send_slack_message(
     `[예약등록완료] 사용자: ${meeting.user_name}  회의 ID: ${meeting.room_id}  예약시간: ${hour}:${minute}`
   );
 
